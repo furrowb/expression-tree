@@ -22,7 +22,7 @@ class OperationTest: ShouldSpec() {
             IntMultiplication(ValueNode(12), ValueNode(0)).evaluate() shouldBe 0
         }
 
-        should("evaluate 12 + -5") {
+        should("evaluate 2 + -5") {
             IntAddition(ValueNode(2), ValueNode(-5)).evaluate() shouldBe -3
         }
 
@@ -41,5 +41,6 @@ class OperationTest: ShouldSpec() {
                             IntMultiplication(ValueNode(5), ValueNode(6))))
             results.evaluate() shouldBe 126
         }
+
     }
 }
