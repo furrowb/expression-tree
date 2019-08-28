@@ -33,8 +33,8 @@ val test by tasks.getting(Test::class) {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
-    // Use JUnit test framework
-    testImplementation("junit:junit:4.12")
+    // Just to remove the slf4j logging error when running tests
+    testImplementation("org.slf4j:slf4j-simple:1.7.25")
 }
 
 sourceSets["main"].withConvention(KotlinSourceSet::class) {
