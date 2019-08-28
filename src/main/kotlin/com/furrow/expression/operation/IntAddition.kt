@@ -4,9 +4,9 @@ import com.furrow.expression.node.Node
 
 class IntAddition(override val firstOperand: Node<Int>, override val secondOperand: Node<Int>): Node<Int>() {
 
-    override fun calculate(): Int = calculateNode(firstOperand) + calculateNode(secondOperand)
+    override fun evaluate(): Int = evaluateNode(firstOperand) + evaluateNode(secondOperand)
 
-    private fun calculateNode(operand: Node<Int>): Int = operand.value ?: operand.calculate()
+    private fun evaluateNode(operand: Node<Int>): Int = operand.value ?: operand.evaluate()
 
     override fun type(): String = "Int Addition"
 }

@@ -5,5 +5,5 @@ abstract class Node<out T>(val value: T? = null) {
     protected abstract val secondOperand: Node<T>?
 
     abstract fun type(): String
-    abstract fun calculate(): T
+    abstract fun evaluate(): T
 }

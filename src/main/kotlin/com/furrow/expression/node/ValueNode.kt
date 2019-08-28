@@ -7,5 +7,5 @@ class ValueNode<T>(value: T): Node<T>(value) {
 
     override fun type(): String = "Node's value: $value"
 
-    override fun calculate(): T = value ?: throw NullPointerException()
+    override fun evaluate(): T = value ?: throw NullPointerException()
 }
