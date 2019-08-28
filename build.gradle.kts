@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.internal.impldep.org.fusesource.jansi.AnsiRenderer.test
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 /*
@@ -20,9 +22,17 @@ repositories {
     jcenter()
 }
 
+val test by tasks.getting(Test::class) {
+    useJUnitPlatform { }
+    testLogging {
+        exceptionFormat = TestExceptionFormat.FULL
+        showStandardStreams = true
+    }
+}
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.2.1")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
     // Use JUnit test framework
     testImplementation("junit:junit:4.12")
 }
