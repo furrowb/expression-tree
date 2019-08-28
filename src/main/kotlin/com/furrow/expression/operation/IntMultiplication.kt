@@ -6,8 +6,8 @@ class IntMultiplication(override val firstOperand: Node<Int>, override val secon
 
     override fun type(): String = "Int Multiplication"
 
-    override fun evaluate(): Int = calculateNode(firstOperand) * calculateNode(secondOperand)
+    override fun evaluate(): Int = evaluateNode(firstOperand) * evaluateNode(secondOperand)
 
-    private fun calculateNode(operand: Node<Int>): Int = operand.value ?: operand.evaluate()
+    private fun evaluateNode(operand: Node<Int>): Int = operand.value ?: operand.evaluate()
 
 }
