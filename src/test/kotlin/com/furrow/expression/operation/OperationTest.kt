@@ -42,5 +42,9 @@ class OperationTest: ShouldSpec() {
             results.evaluate() shouldBe 126
         }
 
+        should("evaluate 2.0 + 3.5") {
+            DoubleAddition(IntToDouble(2), ValueNode(3.5)).evaluate() shouldBe 5.5
+        }
+
     }
 }

@@ -2,14 +2,12 @@ package com.furrow.expression.node
 
 /**
  * A node in the expression tree.
- * @param <F> The description of the first operand
- * @param <S> The description of the second operand
- * @param <T> The output description of the evaluation of the node
+ * @param <T> The output type when the node is evaluated
  */
-abstract class Node<F, S, out T> {
+abstract class Node<T> {
 
-    protected abstract val firstOperand: Node<F, S, T>?
-    protected abstract val secondOperand: Node<F, S, T>?
+    protected abstract val firstOperand: Node<T>?
+    protected abstract val secondOperand: Node<T>?
 
     /**
      * The description of this node
