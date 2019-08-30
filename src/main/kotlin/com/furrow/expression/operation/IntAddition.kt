@@ -2,11 +2,9 @@ package com.furrow.expression.operation
 
 import com.furrow.expression.node.Node
 
-class IntAddition(override val firstOperand: Node<Int>, override val secondOperand: Node<Int>): Node<Int>() {
+class IntAddition<F, S>(override val firstOperand: Node<F, S, Int>, override val secondOperand: Node<F, S, Int>): Node<F, S, Int>() {
 
-    override fun evaluate(): Int = evaluateNode(firstOperand) + evaluateNode(secondOperand)
+    override fun evaluate(): Int = firstOperand.evaluate() + secondOperand.evaluate()
 
-    private fun evaluateNode(operand: Node<Int>): Int = operand.value ?: operand.evaluate()
-
-    override fun type(): String = "Int Addition"
+    override fun description(): String = "Int Addition"
 }

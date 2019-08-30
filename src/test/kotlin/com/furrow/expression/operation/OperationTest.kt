@@ -6,7 +6,7 @@ import io.kotlintest.specs.ShouldSpec
 
 class OperationTest: ShouldSpec() {
     init {
-        should("evalute 2 + 3") {
+        should("evaluate 2 + 3") {
             IntAddition(ValueNode(2), ValueNode(3)).evaluate() shouldBe 5
         }
 
