@@ -1,13 +1,46 @@
 package com.furrow.expression
 
+import com.furrow.expression.node.Node
 import com.furrow.expression.node.ValueNode
-import com.furrow.expression.operation.IntAddition
-import com.furrow.expression.operation.IntMultiplication
+import com.furrow.expression.operation.Addition
+import com.furrow.expression.operation.Multiplication
+import com.furrow.expression.operation.OperationType
+import java.util.*
 
-class FactoryFunction {
-    fun evaluate(): Int {
-        val multiplicationNode = IntMultiplication(ValueNode(5), ValueNode(4))
-        val additionNode = IntAddition(ValueNode(3), multiplicationNode)
-        return additionNode.evaluate()
+class FactoryFunction<T> {
+
+    private val stack: Stack<Node<T>> = Stack()
+
+    fun pushValue(value: T) {
+        stack.push(ValueNode(value))
+    }
+
+    fun pushOperation(operation: OperationType) {
+        if(stack.size < operation.numOfOperands) {
+            throw RuntimeException("Not enough operands for OperationType ${operation.name}")
+        }
+        val params = ArrayList<Node<T>>()
+        for(i in 1..operation.numOfOperands) {
+            params.add(stack.pop())
+        }
+
+        val operationNode = when(operation) {
+            OperationType.ADDITION -> Addition(params)
+            OperationType.MULTIPLICATION -> Multiplication(params)
+        }
+        stack.push(operationNode)
+    }
+
+    fun getRootNode(): Node<T> {
+        if(stack.size != 1) {
+            throw RuntimeException("Stack is either empty or not all values are associated with a operation. Unable to get the root node")
+        }
+        val node = stack.pop()
+        stack.clear()
+        return node
+    }
+
+    fun evaluate(): T {
+        return getRootNode().evaluate()
     }
 }

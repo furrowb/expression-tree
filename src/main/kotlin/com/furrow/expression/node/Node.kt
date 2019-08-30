@@ -4,10 +4,7 @@ package com.furrow.expression.node
  * A node in the expression tree.
  * @param <T> The output type when the node is evaluated
  */
-abstract class Node<T> {
-
-    protected abstract val firstOperand: Node<T>?
-    protected abstract val secondOperand: Node<T>?
+abstract class Node<T>(val params: List<Node<T>>?) {
 
     /**
      * The description of this node
