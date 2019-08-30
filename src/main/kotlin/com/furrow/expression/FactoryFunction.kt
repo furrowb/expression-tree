@@ -1,5 +1,6 @@
 package com.furrow.expression
 
+import com.furrow.expression.exception.OperationException
 import com.furrow.expression.node.Node
 import com.furrow.expression.node.ValueNode
 import com.furrow.expression.operation.Addition
@@ -17,7 +18,7 @@ class FactoryFunction<T> {
 
     fun pushOperation(operation: OperationType<T>) {
         if(stack.size < operation.numOfOperands) {
-            throw RuntimeException("Not enough operands for OperationType ${operation.name()}")
+            throw OperationException("Not enough operands for OperationType ${operation.name()}")
         }
         val params = ArrayList<Node<T>>()
         for(i in 1..operation.numOfOperands) {

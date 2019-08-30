@@ -19,10 +19,31 @@ class Division<T>(params: List<Node<T>>): Node<T>(params) {
         val secondParamResult = params[1].evaluate()
         // Since we know the first parameter is type X, then all of them will be
         return when(firstParamResult) {
-            is Int -> firstParamResult / secondParamResult as Int
-            is Long -> firstParamResult / secondParamResult as Long
-            is Double -> firstParamResult / secondParamResult as Double
+            is Int -> evaluate(firstParamResult, secondParamResult as Int)
+            is Long -> evaluate(firstParamResult, secondParamResult as Long)
+            is Double -> evaluate(firstParamResult, secondParamResult as Double)
             else -> throw OperationException("Unknown type being for ${description()}")
         } as T
+    }
+
+    private fun evaluate(firstOperand: Int, secondOperand: Int): Int {
+        if(secondOperand == 0) {
+            throw OperationException("Dividing by Zero")
+        }
+        return firstOperand / secondOperand
+    }
+
+    private fun evaluate(firstOperand: Long, secondOperand: Long): Long {
+        if(secondOperand == 0L) {
+            throw OperationException("Dividing by Zero")
+        }
+        return firstOperand / secondOperand
+    }
+
+    private fun evaluate(firstOperand: Double, secondOperand: Double): Double {
+        if(secondOperand == 0.0) {
+            throw OperationException("Dividing by Zero")
+        }
+        return firstOperand / secondOperand
     }
 }
