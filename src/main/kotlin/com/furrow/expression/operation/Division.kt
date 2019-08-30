@@ -3,6 +3,7 @@ package com.furrow.expression.operation
 import com.furrow.expression.BINARY_OPERATION
 import com.furrow.expression.exception.OperationException
 import com.furrow.expression.node.Node
+import java.lang.IllegalArgumentException
 
 class Division<T>(params: List<Node<T>>): Node<T>(params) {
 
@@ -28,21 +29,21 @@ class Division<T>(params: List<Node<T>>): Node<T>(params) {
 
     private fun evaluate(firstOperand: Int, secondOperand: Int): Int {
         if(secondOperand == 0) {
-            throw OperationException("Dividing by Zero")
+            throw IllegalArgumentException("Dividing by Zero")
         }
         return firstOperand / secondOperand
     }
 
     private fun evaluate(firstOperand: Long, secondOperand: Long): Long {
         if(secondOperand == 0L) {
-            throw OperationException("Dividing by Zero")
+            throw IllegalArgumentException("Dividing by Zero")
         }
         return firstOperand / secondOperand
     }
 
     private fun evaluate(firstOperand: Double, secondOperand: Double): Double {
         if(secondOperand == 0.0) {
-            throw OperationException("Dividing by Zero")
+            throw IllegalArgumentException("Dividing by Zero")
         }
         return firstOperand / secondOperand
     }

@@ -6,6 +6,7 @@ import io.kotlintest.matchers.doubles.shouldBeBetween
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.ShouldSpec
+import java.lang.IllegalArgumentException
 import java.lang.RuntimeException
 
 class FactoryFunctionTest: ShouldSpec() {
@@ -138,7 +139,7 @@ class FactoryFunctionTest: ShouldSpec() {
                 pushOperation(OperationType.DivisionType())
             }
 
-            shouldThrow<OperationException> {
+            shouldThrow<IllegalArgumentException> {
                 factoryFunction.evaluate()
             }
         }
