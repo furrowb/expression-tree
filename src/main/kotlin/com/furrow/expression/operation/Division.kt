@@ -1,6 +1,7 @@
 package com.furrow.expression.operation
 
 import com.furrow.expression.BINARY_OPERATION
+import com.furrow.expression.exception.OperationException
 import com.furrow.expression.node.Node
 
 class Division<T>(params: List<Node<T>>): Node<T>(params) {
@@ -12,7 +13,7 @@ class Division<T>(params: List<Node<T>>): Node<T>(params) {
     @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
     override fun evaluate(): T {
         if(params?.size != BINARY_OPERATION) {
-            throw RuntimeException("Invalid number of parameters for ${description()}: ${params?.size}")
+            throw OperationException("Invalid number of parameters for ${description()}: ${params?.size}")
         }
         val firstParamResult = params[0].evaluate()
         val secondParamResult = params[1].evaluate()
@@ -21,7 +22,7 @@ class Division<T>(params: List<Node<T>>): Node<T>(params) {
             is Int -> firstParamResult / secondParamResult as Int
             is Long -> firstParamResult / secondParamResult as Long
             is Double -> firstParamResult / secondParamResult as Double
-            else -> throw RuntimeException("Unknown type being for ${description()}")
+            else -> throw OperationException("Unknown type being for ${description()}")
         } as T
     }
 }
