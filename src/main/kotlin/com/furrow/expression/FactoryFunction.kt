@@ -15,19 +15,16 @@ class FactoryFunction<T> {
         stack.push(ValueNode(value))
     }
 
-    fun pushOperation(operation: OperationType) {
+    fun pushOperation(operation: OperationType<T>) {
         if(stack.size < operation.numOfOperands) {
-            throw RuntimeException("Not enough operands for OperationType ${operation.name}")
+            throw RuntimeException("Not enough operands for OperationType ${operation.name()}")
         }
         val params = ArrayList<Node<T>>()
         for(i in 1..operation.numOfOperands) {
             params.add(stack.pop())
         }
 
-        val operationNode = when(operation) {
-            OperationType.ADDITION -> Addition(params)
-            OperationType.MULTIPLICATION -> Multiplication(params)
-        }
+        val operationNode = operation.createOperation(params.reversed())
         stack.push(operationNode)
     }
 

@@ -1,5 +1,6 @@
 package com.furrow.expression.operation
 
+import com.furrow.expression.BINARY_OPERATION
 import com.furrow.expression.node.Node
 import java.lang.RuntimeException
 
@@ -11,7 +12,7 @@ class Multiplication<T>(params: List<Node<T>>?): Node<T>(params) {
     // what it is and then returning it back to T (which is what it was).
     @Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
     override fun evaluate(): T {
-        if(params?.size != OperationType.MULTIPLICATION.numOfOperands) {
+        if(params?.size != BINARY_OPERATION) {
             throw RuntimeException("Invalid number of parameters for ${description()}: ${params?.size}")
         }
         val firstParamResult = params[0].evaluate()

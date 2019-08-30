@@ -1,6 +1,7 @@
 package com.furrow.expression
 
 import com.furrow.expression.operation.OperationType
+import io.kotlintest.matchers.doubles.shouldBeBetween
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
@@ -12,8 +13,8 @@ class FactoryFunctionTest: ShouldSpec() {
                 pushValue(3)
                 pushValue(4)
                 pushValue(5)
-                pushOperation(OperationType.MULTIPLICATION)
-                pushOperation(OperationType.ADDITION)
+                pushOperation(OperationType.MultiplicationType())
+                pushOperation(OperationType.AdditionType())
             }
 
             factoryFunction.evaluate() shouldBe 23
@@ -24,7 +25,7 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(2)
                 pushValue(3)
-                pushOperation(OperationType.ADDITION)
+                pushOperation(OperationType.AdditionType())
             }
 
             factoryFunction.evaluate() shouldBe 5
@@ -35,7 +36,7 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(2)
                 pushValue(3)
-                pushOperation(OperationType.MULTIPLICATION)
+                pushOperation(OperationType.MultiplicationType())
             }
 
             factoryFunction.evaluate() shouldBe 6
@@ -46,7 +47,7 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(0)
                 pushValue(0)
-                pushOperation(OperationType.ADDITION)
+                pushOperation(OperationType.AdditionType())
             }
 
             factoryFunction.evaluate() shouldBe 0
@@ -57,7 +58,7 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(12)
                 pushValue(0)
-                pushOperation(OperationType.MULTIPLICATION)
+                pushOperation(OperationType.MultiplicationType())
             }
 
             factoryFunction.evaluate() shouldBe 0
@@ -68,7 +69,7 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(2)
                 pushValue(-5)
-                pushOperation(OperationType.ADDITION)
+                pushOperation(OperationType.AdditionType())
             }
 
             factoryFunction.evaluate() shouldBe -3
@@ -79,7 +80,7 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(12)
                 pushValue(-5)
-                pushOperation(OperationType.MULTIPLICATION)
+                pushOperation(OperationType.MultiplicationType())
             }
 
             factoryFunction.evaluate() shouldBe -60
@@ -90,9 +91,9 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(2)
                 pushValue(3)
-                pushOperation(OperationType.MULTIPLICATION)
+                pushOperation(OperationType.MultiplicationType())
                 pushValue(3)
-                pushOperation(OperationType.ADDITION)
+                pushOperation(OperationType.AdditionType())
             }
 
             factoryFunction.evaluate() shouldBe 9
@@ -103,16 +104,27 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.apply {
                 pushValue(2)
                 pushValue(3)
-                pushOperation(OperationType.MULTIPLICATION)
+                pushOperation(OperationType.MultiplicationType())
                 pushValue(4)
                 pushValue(5)
                 pushValue(6)
-                pushOperation(OperationType.MULTIPLICATION)
-                pushOperation(OperationType.MULTIPLICATION)
-                pushOperation(OperationType.ADDITION)
+                pushOperation(OperationType.MultiplicationType())
+                pushOperation(OperationType.MultiplicationType())
+                pushOperation(OperationType.AdditionType())
             }
 
             factoryFunction.evaluate() shouldBe 126
+        }
+
+        should("evaluate 6 / 3") {
+            val factoryFunction = FactoryFunction<Double>()
+            factoryFunction.apply {
+                pushValue(6.0)
+                pushValue(3.0)
+                pushOperation(OperationType.DivisionType())
+            }
+
+            factoryFunction.evaluate() shouldBe 2.0
         }
     }
 }
