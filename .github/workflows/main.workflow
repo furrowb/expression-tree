@@ -1,5 +1,6 @@
 workflow "Push" {
   on = "push"
+  branch = "master"
   resolves = ["Build"]
 }
 
