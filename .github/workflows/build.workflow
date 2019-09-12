@@ -1,4 +1,4 @@
-workflow "New workflow" {
+workflow "Push" {
   on = "push"
   resolves = ["MrRamych/gradle-actions/openjdk-8@2.1"]
 }
