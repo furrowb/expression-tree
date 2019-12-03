@@ -28,23 +28,21 @@ class Division<T>(params: List<Node<T>>): Node<T>(params) {
     }
 
     private fun evaluate(firstOperand: Int, secondOperand: Int): Int {
-        if(secondOperand == 0) {
-            throw IllegalArgumentException("Dividing by Zero")
-        }
+        checkDivisionByZero(secondOperand)
         return firstOperand / secondOperand
     }
 
     private fun evaluate(firstOperand: Long, secondOperand: Long): Long {
-        if(secondOperand == 0L) {
-            throw IllegalArgumentException("Dividing by Zero")
-        }
+        checkDivisionByZero(secondOperand)
         return firstOperand / secondOperand
     }
 
     private fun evaluate(firstOperand: Double, secondOperand: Double): Double {
-        if(secondOperand == 0.0) {
-            throw IllegalArgumentException("Dividing by Zero")
-        }
+        checkDivisionByZero(secondOperand)
         return firstOperand / secondOperand
+    }
+
+    private fun checkDivisionByZero(denominator: Number) {
+        require(denominator.toDouble() != 0.0) { "Dividing by Zero" }
     }
 }

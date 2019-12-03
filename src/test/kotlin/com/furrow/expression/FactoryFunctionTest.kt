@@ -1,6 +1,8 @@
 package com.furrow.expression
 
 import com.furrow.expression.exception.OperationException
+import com.furrow.expression.node.ValueNode
+import com.furrow.expression.operation.Addition
 import com.furrow.expression.operation.OperationType
 import io.kotlintest.matchers.doubles.shouldBeBetween
 import io.kotlintest.shouldBe
@@ -131,16 +133,19 @@ class FactoryFunctionTest: ShouldSpec() {
             factoryFunction.evaluate() shouldBe 2.0
         }
 
-        should("handle division by 0") {
-             val factoryFunction = FactoryFunction<Double>()
-            factoryFunction.apply {
-                pushValue(6.0)
-                pushValue(0.0)
-                pushOperation(OperationType.DivisionType())
+        should("throw exception for empty stack") {
+            val factoryFunctionTest = FactoryFunction<Long>()
+            shouldThrow<RuntimeException> {
+                factoryFunctionTest.evaluate()
             }
+        }
 
-            shouldThrow<IllegalArgumentException> {
-                factoryFunction.evaluate()
+        should("throw exception for not enough operands") {
+            val factoryFunction = FactoryFunction<Long>()
+            factoryFunction.pushValue(1L)
+
+            shouldThrow<OperationException> {
+                factoryFunction.pushOperation(OperationType.AdditionType())
             }
         }
     }

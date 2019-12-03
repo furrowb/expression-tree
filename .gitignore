@@ -4,3 +4,6 @@
 target/
 build/
 .kotlintest/
+
+# Code coverage directory
+out/
